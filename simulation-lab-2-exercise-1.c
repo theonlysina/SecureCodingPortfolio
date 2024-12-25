@@ -1,8 +1,8 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+include <string.h>
+include <stdio.h>
+include <stdlib.h>
 
-#define BUFSIZE 256
+define BUFSIZE 256
 
 // Function to safely encode the user input for shell usage
 void encodeShellString(char *dest, size_t size, const char *src) {
@@ -21,10 +21,10 @@ int main(int argc, char** argv) {
         // the user string is encoded by a library routine.
         char filePath[BUFSIZE] = {0};
         encodeShellString(filePath, sizeof(filePath), argv[1]);
-        char cmd[BUFSIZE] = {0};
-        snprintf(cmd, sizeof(cmd), "wc -c < %s", filePath);
-        system(cmd);
-    }
+		char cmd[BUFSIZE] = {0};
+		snprintf(cmd, sizeof(cmd), "wc -c < \"%s\"", filePath);
+		system(cmd);
+   }
 
     return 0;
 }
