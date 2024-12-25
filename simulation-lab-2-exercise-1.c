@@ -7,7 +7,7 @@
 // Function to safely encode the user input for shell usage
 void encodeShellString(char *dest, size_t size, const char *src) {
     size_t j = 0;
-    
+
     // Start by quoting the string
     if (j < size - 1) {
         dest[j++] = '"';
@@ -34,7 +34,7 @@ void encodeShellString(char *dest, size_t size, const char *src) {
     if (j < size - 1) {
         dest[j++] = '"';
     }
-    
+
     // Null-terminate the string
     dest[j] = '\0';
 }
@@ -44,22 +44,22 @@ void constructCommand(char *cmd, size_t size, const char *filePath) {
     snprintf(cmd, size, "wc -c < %s", filePath); // Construct the command string
 }
 
-// main function of the program; prints size of a file in bytes
+// Main function of the program; prints size of a file in bytes
 int main(int argc, char** argv) {
-    // ensures the user supplied exactly one command line argument
+    // Ensure the user supplied exactly one command line argument
     if (argc != 2) { 
         fprintf(stderr, "Please provide the address of a file as an input.\n");
         return -1;
     }
-	
-	// the user string is encoded by a library routine.
-	char filePath[BUFSIZE] = {0};
-	encodeShellString(filePath, sizeof(filePath), argv[1]);
-		
-	// safely construct command (a string)
+
+    // The user string is encoded by a library routine.
+    char filePath[BUFSIZE] = {0};
+    encodeShellString(filePath, sizeof(filePath), argv[1]);
+
+    // Safely construct command (a string)
     char cmd[BUFSIZE] = {0};
     constructCommand(cmd, sizeof(cmd), filePath);
-	
+
     // Execute command and handle errors
     if (system(cmd) == -1) {
         perror("Error executing command");
