@@ -21,9 +21,10 @@ int main(int argc, char** argv) {
         // the user string is encoded by a library routine.
         char filePath[BUFSIZE] = {0};
         encodeShellString(filePath, sizeof(filePath), argv[1]);
-		char cmd[BUFSIZE] = {0};
-		snprintf(cmd, sizeof(cmd), "wc -c < \"%s\"", filePath);
-		system(cmd);
+	
+	char cmd[BUFSIZE] = {0};
+	snprintf(cmd, sizeof(cmd), "wc -c < \"%s\"", filePath);
+	system(cmd);
    }
 
     return 0;
